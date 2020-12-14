@@ -31,7 +31,7 @@
             <li>Subject: From {{ mail.from_address }}</li>
             <li>Status: <strong>{{ mail.status }}</strong></li>
             <li>Creation date: {{ mail.creation_date }}</li>
-            <li>Send date: {{ mail.send_timeout }}</li>
+            <li>Timeout(sec): {{ mail.send_timeout }}</li>
         </ul>
         {% endfor %}
         {% endif %}
