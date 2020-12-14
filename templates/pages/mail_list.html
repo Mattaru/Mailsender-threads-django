@@ -6,9 +6,9 @@
     <div class="col-8">
         <br>
         <h3>The last 10 emails:</h3>
+        {% for mail in object_list %}
+        <br>
         <ul>
-            {% for mail in object_list %}
-            <br>
             <li><strong>Email N{{ forloop.counter }}</strong></li>
             <li>From: {{ mail.from_address }}</li>
             <li>To: {{ mail.to_address }}</li>
@@ -17,38 +17,36 @@
             <li>Creation date: {{ mail.creation_date }}</li>
             <li>Send date: {{ mail.send_date }}</li>
             <li>Timeout(sec): {{ mail.send_timeout }}</li>
-            {% endfor %}
         </ul>
+        {% endfor %}
     </div>
     <div class="col-4">
         <br>
         <br>
         {% if waiting_to_send %}
         <h5>The emails waiting to send:</h5>
+        {% for mail in waiting_to_send%}
+        <br>
         <ul>
-            {% for mail in waiting_to_send%}
-            <br>
             <li>Subject: From {{ mail.from_address }}</li>
-            <li>Message: {{ mail.message }}</li>
             <li>Status: <strong>{{ mail.status }}</strong></li>
             <li>Creation date: {{ mail.creation_date }}</li>
-            <li>Send date: {{ mail.send_date }}</li>
-            {% endfor %}
+            <li>Send date: {{ mail.send_timeout }}</li>
         </ul>
+        {% endfor %}
         {% endif %}
         <br>
         {% if sended %}
         <h5>The sended emails:</h5>
+        {% for mail in sended %}
+        <br>
         <ul>
-            {% for mail in sended %}
-            <br>
             <li>Subject: From {{ mail.from_address }}</li>
-            <li>Message: {{ mail.message }}</li>
             <li>Status: <strong>{{ mail.status }}</strong></li>
             <li>Creation date: {{ mail.creation_date }}</li>
             <li>Send date: {{ mail.send_date }}</li>
-            {% endfor %}
         </ul>
+        {% endfor %}
         {% endif %}
     </div>
 </div>
