@@ -1,0 +1,6 @@
+.idea
+env
+*.pyc
+mailsender/__pycache__
+app/__pycache__
+db.sqlite3
