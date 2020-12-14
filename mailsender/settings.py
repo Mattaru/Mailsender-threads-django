@@ -6,7 +6,6 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# SECRET_KEY = '@jy)f7cxq09-9iw=4b-cqe!%lw+vh5zh)^37d39smf@86k8nac'
 SECRET_KEY = os.environ.get('SECRET_KEY', 'please-set-secret-key-through-env')
 
 

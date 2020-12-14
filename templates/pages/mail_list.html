@@ -12,7 +12,6 @@
             <li><strong>Email N{{ forloop.counter }}</strong></li>
             <li>From: {{ mail.from_address }}</li>
             <li>To: {{ mail.to_address }}</li>
-            <li>Subject: {{ mail.subject }}</li>
             <li>Message: {{ mail.message }}</li>
             <li>Status: <strong>{{ mail.status }}</strong></li>
             <li>Creation date: {{ mail.creation_date }}</li>
@@ -24,6 +23,7 @@
     <div class="col-4">
         <br>
         <br>
+        {% if waiting_to_send %}
         <h5>The emails waiting to send:</h5>
         <ul>
             {% for mail in waiting_to_send%}
@@ -35,7 +35,9 @@
             <li>Send date: {{ mail.send_date }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
         <br>
+        {% if sended %}
         <h5>The sended emails:</h5>
         <ul>
             {% for mail in sended %}
@@ -47,6 +49,7 @@
             <li>Send date: {{ mail.send_date }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
     </div>
 </div>
 
