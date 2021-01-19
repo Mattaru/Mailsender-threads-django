@@ -98,7 +98,7 @@ STATICFIELDS_DIRS = [
 # os.environ.get('PASS')
 
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-SENDGRID_API_KEY = os.getenv('PASS')
+SENDGRID_API_KEY = os.environ.get('PASS')
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 
