@@ -1,4 +1,5 @@
 import threading
+import sys
 from datetime import datetime
 
 from django.db import models
@@ -55,7 +56,8 @@ def send_mail_with_data(instance):
         print(f'Email has been sended. Timeout: {instance.send_timeout}')
         update_mail_data(instance)
     except:
-        print('Sending error')
+        e = sys.exc_info()
+        print(f'Sending error: {e}')
 
 
 def add_thread(instance, **kwargs):
