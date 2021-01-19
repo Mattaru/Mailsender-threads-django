@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', 'please-set-secret-key-through-env')
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -95,14 +95,11 @@ STATICFIELDS_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# os.environ.get('PASS')
 
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = 'gctdljgkjnm@mail.ru'
-EMAIL_HOST_PASSWORD = os.environ.get('PASS')
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = os.getenv('PASS')
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
-EMAIL_TIMEOUT = None
 
 django_heroku.settings(locals())

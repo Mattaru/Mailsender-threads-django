@@ -37,53 +37,58 @@ class MailCreation(CreateView):
 
 
 # Sendin email with a view
-def update_mail_data(mail_obj):
-    """
-    Updating the fields send_date and status.
-    """
-    date = datetime.now()
-    Mail.objects.filter(pk=mail_obj.pk).update(send_date=date, status='sended')
-    print('Send date updated.')
+# def update_mail_data(mail_obj):
+#     """
+#     Updating the fields send_date and status.
+#     """
+#     date = datetime.now()
+#     Mail.objects.filter(pk=mail_obj.pk).update(send_date=date, status='sended')
+#     print('Send date updated.')
+#
+#
+# def send_mail_with_data(mail_obj):
+#     """
+#     Sending email with a new data from the mail_obj.
+#     """
+#     try:
+#         send_mail(
+#             f'Message from {mail_obj.from_address}',
+#             mail_obj.message,
+#             mail_obj.from_address,
+#             [mail_obj.to_address],
+#             fail_silently=False
+#         )
+#         print(f'Email has been sended. Timeout: {mail_obj.send_timeout}')
+#         update_mail_data(mail_obj)
+#     except:
+#         print('Sending error')
+#
+#
+# def add_thread(mail_obj):
+#     """
+#     Adding the new thread with timeout.
+#     """
+#     timer = float(mail_obj.send_timeout)
+#     t = threading.Timer(timer, send_mail_with_data, args=(mail_obj,))
+#     t.start()
+#
+#
+# def mail_creation(request):
+#     if request.method == 'POST':
+#         form = Mail1Form(request.POST)
+#         if form.is_valid:
+#             mail_to = request.POST.get('to_address')
+#             message = request.POST.get('message')
+#             timeout = request.POST.get('send_timeout')
+#             mail_obj = Mail.objects.create(message=message, to_address=mail_to, send_timeout=timeout)
+#             mail_obj.save()
+#             add_thread(mail_obj)
+#             return redirect(reverse_lazy('app:mail-list'))
+#         else:
+#             messages.error(request, 'Data error')
+#     else:
+#         form = Mail1Form()
+#
+#     return render(request, 'pages/mail_create.html', {'form': form})
 
 
-def send_mail_with_data(mail_obj):
-    """
-    Sending email with a new data from the mail_obj.
-    """
-    send_mail(
-        f'Message from {mail_obj.from_address}',
-        mail_obj.message,
-        mail_obj.from_address,
-        [mail_obj.to_address],
-        fail_silently=False
-    )
-    print(f'Email has been sended. Timeout: {mail_obj.send_timeout}')
-    update_mail_data(mail_obj)
-
-
-def add_thread(mail_obj):
-    """
-    Adding the new thread with timeout.
-    """
-    timer = float(mail_obj.send_timeout)
-    t = threading.Timer(timer, send_mail_with_data, args=(mail_obj,))
-    t.start()
-
-
-def mail_creation(request):
-    if request.method == 'POST':
-        form = Mail1Form(request.POST)
-        if form.is_valid:
-            mail_to = request.POST.get('to_address')
-            message = request.POST.get('message')
-            timeout = request.POST.get('send_timeout')
-            mail_obj = Mail.objects.create(message=message, to_address=mail_to, send_timeout=timeout)
-            mail_obj.save()
-            add_thread(mail_obj)
-            return redirect(reverse_lazy('app:mail-list'))
-        else:
-            messages.error(request, 'Data error')
-    else:
-        form = Mail1Form()
-
-    return render(request, 'pages/mail_create.html', {'form': form})

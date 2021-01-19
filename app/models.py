@@ -13,7 +13,7 @@ THREADS = []
 class Mail(models.Model):
     message = models.TextField(verbose_name='Message')
     from_address = models.EmailField(verbose_name='From email', max_length=155,
-                                    default=settings.EMAIL_HOST_USER)
+                                    default='gctdljgkjnm@mail.ru')
     to_address = models.EmailField(verbose_name='To email', max_length=155)
     WAITING = 'waiting to send'
     SENDED = 'sended'
@@ -44,15 +44,18 @@ def send_mail_with_data(instance):
     """
     Sending email with a new data from the mail_obj.
     """
-    send_mail(
-        f'Message from {instance.from_address}',
-        instance.message,
-        instance.from_address,
-        [instance.to_address],
-        fail_silently=False,
-    )
-    print(f'Email has been sended. Timeout: {instance.send_timeout}')
-    update_mail_data(instance)
+    try:
+        send_mail(
+            f'Message from {instance.from_address}',
+            instance.message,
+            instance.from_address,
+            [instance.to_address],
+            fail_silently=False,
+        )
+        print(f'Email has been sended. Timeout: {instance.send_timeout}')
+        update_mail_data(instance)
+    except:
+        print('Sending error')
 
 
 def add_thread(instance, **kwargs):
@@ -65,3 +68,4 @@ def add_thread(instance, **kwargs):
 
 
 post_save.connect(add_thread, sender=Mail)
+
